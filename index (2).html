@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Preset Garden – Alight Motion preset library</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9ecd6;--paper:#f6f3e4;--ink:#17301f;--moss:#2f6b3a;--lime:#a7d12f;--rust:#c8553d;--line:#17301f33;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1d14;--paper:#173022;--ink:#e6efc9;--moss:#7fc25a;--lime:#c6f04a;--rust:#ff8a6b;--line:#e6efc933}}
+:root[data-theme="dark"]{--bg:#0f1d14;--paper:#173022;--ink:#e6efc9;--moss:#7fc25a;--lime:#c6f04a;--rust:#ff8a6b;--line:#e6efc933}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Mono',ui-monospace,Menlo,monospace;font-size:14px;
+background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:18px 18px}
+main{max-width:920px;margin:0 auto;padding:28px 18px 80px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:3px double var(--ink);padding-bottom:14px;margin-bottom:22px}
+h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(34px,8vw,58px);margin:0;line-height:.95;letter-spacing:-1px}
+h1 em{color:var(--moss);font-weight:500}
+.sub{margin:8px 0 0;opacity:.8;max-width:46ch}
+.stamp{border:2px solid var(--rust);color:var(--rust);padding:4px 10px;transform:rotate(4deg);font-weight:500;white-space:nowrap;text-transform:uppercase;font-size:12px;letter-spacing:1px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.box{background:var(--paper);border:2px solid var(--ink);border-radius:4px 18px 4px 18px;padding:16px;box-shadow:5px 5px 0 var(--ink)}
+.box h2{font-family:'Fraunces',Georgia,serif;font-size:21px;margin:0 0 10px}
+label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:10px 0 4px}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--ink);padding:7px 2px;outline:none}
+input:focus,textarea:focus{border-color:var(--moss);background:var(--lime)22}
+textarea{border:2px solid var(--ink);border-radius:4px;min-height:84px;resize:vertical;padding:8px}
+button{font:inherit;font-weight:500;cursor:pointer;color:var(--paper);background:var(--ink);border:2px solid var(--ink);padding:8px 14px;border-radius:99px;margin:10px 6px 0 0;transition:transform .12s}
+button:hover{transform:translateY(-2px)}
+button.alt{background:transparent;color:var(--ink)}button.go{background:var(--moss);border-color:var(--moss);color:#fff}
+.msg{min-height:20px;margin-top:8px;color:var(--moss);font-weight:500}.msg.err{color:var(--rust)}
+.bar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:26px 0 12px}
+.bar input{max-width:260px;border:2px solid var(--ink);border-radius:99px;padding:8px 14px}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.pack{position:relative;background:var(--paper);border:2px solid var(--ink);border-radius:3px;padding:14px 14px 12px;box-shadow:4px 4px 0 var(--moss)}
+.pack:nth-child(odd){transform:rotate(-.6deg)}.pack:nth-child(even){transform:rotate(.5deg)}
+.pack:before{content:"";position:absolute;top:-9px;left:50%;width:54px;height:16px;margin-left:-27px;background:var(--lime);opacity:.85;transform:rotate(-3deg)}
+.pack .n{font-family:'Fraunces',Georgia,serif;font-size:19px;margin:6px 0 2px;word-break:break-word}
+.pack a{font-size:11px;word-break:break-all;color:var(--moss)}
+.pack .row{display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:11px}
+.pack button{padding:4px 10px;font-size:12px;margin:8px 4px 0 0}
+.empty{text-align:center;padding:40px 10px;border:2px dashed var(--ink);border-radius:12px;opacity:.8}
+footer{margin-top:40px;font-size:12px;opacity:.7}
+</style>
+</head>
+<body>
+<main>
+<header>
+ <div><h1>Preset <em>Garden</em></h1><p class="sub">Plant your Alight Motion preset links, name them, and swap seeds with friends. Importing only ever adds.</p></div>
+ <div class="stamp" id="count">0 seeds</div>
+</header>
+
+<div class="grid">
+ <section class="box">
+  <h2>🌱 Plant a preset</h2>
+  <label for="pn">Name</label><input id="pn" placeholder="e.g. Smooth zoom shake" maxlength="60">
+  <label for="pl">Alight Motion link</label><input id="pl" placeholder="https://alightcreative.com/am/share/...">
+  <label for="pt">Tag (optional)</label><input id="pt" placeholder="transition, glow, text…" maxlength="24">
+  <button class="go" id="add">Add to garden</button>
+  <div class="msg" id="m1"></div>
+ </section>
+ <section class="box">
+  <h2>🧺 Trade seeds</h2>
+  <label for="code">Paste a share code</label>
+  <textarea id="code" placeholder="ALM1-…"></textarea>
+  <button class="go" id="imp">Import (adds only)</button>
+  <button class="alt" id="exp">Make code from selected</button>
+  <button class="alt" id="expall">Code for all</button>
+  <div class="msg" id="m2"></div>
+ </section>
+</div>
+
+<div class="bar">
+ <input id="q" placeholder="Search names or tags…">
+ <div><button class="alt" id="sel">Select all</button><button class="alt" id="theme">Light/Dark</button></div>
+</div>
+<div class="list" id="list"></div>
+<footer>Saved only in this browser. Leaving the page won't erase anything. Clearing site data will.</footer>
+</main>
+<script>
+const KEY="presetGarden.v1";let items=[],picked=new Set();
+const $=id=>document.getElementById(id);
+function load(){try{items=JSON.parse(localStorage.getItem(KEY)||"[]");if(!Array.isArray(items))items=[]}catch(e){items=[]}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(items))}catch(e){say("m1","Couldn't save in this browser.",1)}}
+function say(id,t,err){const e=$(id);e.textContent=t;e.className="msg"+(err?" err":"")}
+const norm=u=>u.trim().replace(/\/+$/,"").toLowerCase();
+const uid=()=>Math.random().toString(36).slice(2,10);
+function valid(u){try{const x=new URL(u);return x.protocol==="https:"||x.protocol==="http:"}catch(e){return false}}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function render(){
+ const q=$("q").value.toLowerCase();
+ const v=items.filter(i=>(i.name+" "+i.tag).toLowerCase().includes(q));
+ $("count").textContent=items.length+(items.length===1?" seed":" seeds");
+ $("list").innerHTML=v.length?v.map(i=>`<div class="pack"><div class="row"><label style="margin:0"><input type="checkbox" style="width:auto" data-s="${i.id}" ${picked.has(i.id)?"checked":""}> pick</label><span>${esc(i.tag||"")}</span></div>
+ <div class="n">${esc(i.name)}</div><a href="${esc(i.url)}" target="_blank" rel="noopener noreferrer">${esc(i.url)}</a>
+ <div><button data-o="${i.id}">Open</button><button class="alt" data-c="${i.id}">Copy</button><button class="alt" data-r="${i.id}">Rename</button><button class="alt" data-d="${i.id}">Delete</button></div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">${items.length?"Nothing matches that search.":"The garden is empty. Plant your first preset above."}</div>`;
+}
+$("add").onclick=()=>{
+ const name=$("pn").value.trim(),url=$("pl").value.trim(),tag=$("pt").value.trim();
+ if(!name)return say("m1","Give it a name.",1);
+ if(!valid(url))return say("m1","That doesn't look like a valid link.",1);
+ if(items.some(i=>norm(i.url)===norm(url)))return say("m1","That link is already in your garden.",1);
+ items.unshift({id:uid(),name,url,tag});save();render();
+ $("pn").value=$("pl").value=$("pt").value="";say("m1","Planted ✓");
+};
+$("list").onclick=e=>{
+ const b=e.target.closest("button"),t=e.target;
+ if(t.dataset&&t.dataset.s){t.checked?picked.add(t.dataset.s):picked.delete(t.dataset.s);return}
+ if(!b)return;const f=i=>items.find(x=>x.id===i);
+ if(b.dataset.o)window.open(f(b.dataset.o).url,"_blank","noopener");
+ if(b.dataset.c)navigator.clipboard.writeText(f(b.dataset.c).url).then(()=>say("m1","Link copied ✓"),()=>say("m1","Copy failed.",1));
+ if(b.dataset.r){const it=f(b.dataset.r),n=prompt("New name:",it.name);if(n&&n.trim()){it.name=n.trim();save();render()}}
+ if(b.dataset.d){if(confirm("Delete this preset?")){items=items.filter(x=>x.id!==b.dataset.d);picked.delete(b.dataset.d);save();render()}}
+};
+function makeCode(list){
+ const j=JSON.stringify(list.map(i=>[i.name,i.url,i.tag||""]));
+ return "ALM1-"+btoa(unescape(encodeURIComponent(j)));
+}
+function out(list){
+ if(!list.length)return say("m2","Nothing to export yet.",1);
+ const c=makeCode(list);$("code").value=c;
+ navigator.clipboard.writeText(c).then(()=>say("m2",`Code for ${list.length} preset(s) copied ✓`),()=>say("m2",`Code made for ${list.length}. Copy it from the box.`));
+}
+$("exp").onclick=()=>out(items.filter(i=>picked.has(i.id)));
+$("expall").onclick=()=>out(items);
+$("imp").onclick=()=>{
+ let c=$("code").value.trim();
+ if(!c.startsWith("ALM1-"))return say("m2","That isn't a Preset Garden code.",1);
+ let arr;try{arr=JSON.parse(decodeURIComponent(escape(atob(c.slice(5)))))}catch(e){return say("m2","Couldn't read that code.",1)}
+ if(!Array.isArray(arr))return say("m2","Couldn't read that code.",1);
+ let add=0,skip=0;
+ arr.forEach(r=>{
+  if(!Array.isArray(r)||!valid(String(r[1]||"")))return skip++;
+  if(items.some(i=>norm(i.url)===norm(r[1])))return skip++;
+  items.push({id:uid(),name:String(r[0]||"Untitled").slice(0,60),url:String(r[1]),tag:String(r[2]||"").slice(0,24)});add++;
+ });
+ save();render();$("code").value="";
+ say("m2",`Added ${add} new preset(s)${skip?`, skipped ${skip} you already had`:""}. Your existing ones are untouched.`);
+};
+$("sel").onclick=()=>{picked=picked.size===items.length?new Set():new Set(items.map(i=>i.id));render()};
+$("q").oninput=render;
+$("theme").onclick=()=>{const r=document.documentElement,d=getComputedStyle(r).getPropertyValue("--bg").trim()==="#0f1d14";r.dataset.theme=d?"light":"dark"};
+load();render();
+</script>
+</body>
+</html>
